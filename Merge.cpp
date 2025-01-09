@@ -2,7 +2,14 @@
 #include<vector>
 #include<limits.h>
 using namespace std;
-vector<int>arr = {78,6,1,8,45,68,19,55,86,66};
+vector<int>arr;
+
+void DataGenerate()
+{
+    srand((size_t)time(NULL));
+    for(int i = 0;i<10000000;i++)
+        arr.push_back(rand());
+}
 
 void Merge(vector<int>&arr,int begin,int end)
 {
@@ -29,10 +36,16 @@ void MergeSort(vector<int>&arr,int begin,int end)
 
 int main()
 {
+    clock_t bg,ed;
+    bg = clock();
+    DataGenerate();
     MergeSort(arr,0,arr.size()-1);
     
-    for(int i = 0;i<arr.size();i++)
-        cout<<arr[i]<<endl;
+    // for(int i = 0;i<arr.size();i++)
+    //     cout<<arr[i]<<endl;
 
+
+    ed = clock();
+    cout<<endl<<"->"<<ed - bg<<"<-";
     return 0;
 }
