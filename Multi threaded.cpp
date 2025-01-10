@@ -82,15 +82,18 @@ void* presort(vector<int>&subarr)
 
 int main()
 {
-    clock_t bg,ed;
-    bg = clock();
-    DataGenerate();
+    clock_t c1,c2;
+    DataGenerate(); 
+
+    c1 = clock();
+    time_t t1,t2;
+    t1 = time(NULL);
     arr = SortWithThread();
-    // for(int i = 0;i<arr.size();i++)
-    //     cout<<arr[i]<<endl;
-    ed = clock();
+    t2 = time(NULL);
+    c2 = clock();
 
-    cout<<endl<<"->"<<ed - bg<<"<-";
+    cout<<endl<<"多线程->"<<(c2 - c1)/(CLOCKS_PER_SEC/1000)<<"<-";
 
+    cout<<"=="<<t2-t1<<"=="<<endl;
     return 0;
 }

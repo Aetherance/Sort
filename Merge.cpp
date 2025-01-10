@@ -7,7 +7,7 @@ vector<int>arr;
 void DataGenerate()
 {
     srand((size_t)time(NULL));
-    for(int i = 0;i<10000000;i++)
+    for(int i = 0;i<100000000;i++)
         arr.push_back(rand());
 }
 
@@ -37,15 +37,12 @@ void MergeSort(vector<int>&arr,int begin,int end)
 int main()
 {
     clock_t bg,ed;
-    bg = clock();
     DataGenerate();
-    MergeSort(arr,0,arr.size()-1);
     
-    // for(int i = 0;i<arr.size();i++)
-    //     cout<<arr[i]<<endl;
-
-
+    bg = clock();
+    MergeSort(arr,0,arr.size()-1);
     ed = clock();
-    cout<<endl<<"->"<<ed - bg<<"<-";
+
+    cout<<endl<<"单线程->"<<ed - bg<<"<-";
     return 0;
 }
