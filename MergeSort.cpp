@@ -12,7 +12,6 @@ void DataGenerate()
         arr.push_back(rand());
 }
 
-
 void Merge(vector<int>&arr,int begin,int mid,int end) {
     vector<int>left(arr.begin()+begin,arr.begin()+mid+1);
     vector<int>right(arr.begin()+mid+1,arr.begin()+end+1);
@@ -44,13 +43,13 @@ int main()
     clock_t c1,c2;
     DataGenerate();
     time_t t1,t2;
-    c1 = clock();
+    // c1 = clock();
     t1 = time(NULL);
     MergeSort(arr,0,arr.size()-1);
     t2 = time(NULL);
-    c2 = clock();
-    // ArrPrint(arr);
-    cout<<endl<<"单线程->"<<(c2 - c1)/ (CLOCKS_PER_SEC/1000)<<"<-";
-    cout<<"=="<<t2-t1<<"=="<<endl;
+    // c2 = clock();
+    
+    // cout<<endl<<"单线程->"<<(c2 - c1)<<"<-";
+    cout<<"单线程 done! 共用"<<t2-t1<<"秒"<<endl;
     return 0;
 }

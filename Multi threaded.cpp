@@ -47,7 +47,6 @@ vector<int> SortWithThread()
     return line1;
 }
 
-
 void Merge(vector<int>&arr,int begin,int end)
 {
     int mid = (begin + end)/2;
@@ -85,15 +84,15 @@ int main()
     clock_t c1,c2;
     DataGenerate(); 
 
-    c1 = clock();
+    // c1 = clock();
     time_t t1,t2;
     t1 = time(NULL);
     arr = SortWithThread();
     t2 = time(NULL);
-    c2 = clock();
+    // c2 = clock();
 
-    cout<<endl<<"多线程->"<<(c2 - c1)/(CLOCKS_PER_SEC/1000)<<"<-";
+    // cout<<endl<<"多线程->"<<(c2 - c1)<<"<-";
 
-    cout<<"=="<<t2-t1<<"=="<<endl;
+    cout<<"多线程 done! 共用"<<t2-t1<<"秒"<<endl;
     return 0;
 }
