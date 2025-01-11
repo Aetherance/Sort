@@ -11,7 +11,7 @@ void Merge(vector<int>&arr,int begin,int end);
 void DataGenerate()
 {
     srand((size_t)time(NULL));
-    for(int i = 0;i<10000000;i++)
+    for(int i = 0;i<10;i++)
         arr.push_back(rand());
 }
 

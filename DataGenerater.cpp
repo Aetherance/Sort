@@ -1,23 +1,18 @@
 #include<iostream>
-#include<string.h>
 #include<vector>
-#include<fcntl.h>
-#include<unistd.h>
+
 using namespace std;
-vector<string>vs;
-void DataGenerate(int fd)
+vector<int>arr;
+
+void DataGenerate()
 {
     srand((size_t)time(NULL));
-    for(int i = 0;i<10000000;i++)
-    {
-        char buf[32];
-        sprintf(buf,"%d,",rand());
-        write(fd,buf,strlen(buf));
-    }
+    for(int i = 0;i<10;i++)
+        arr.push_back(rand());
 }
+
 int main()
 {
-    int fd = open("/home/user/CODE/Sort/Data.h",O_WRONLY);
-    DataGenerate(fd);
+    DataGenerate();
     return 0;
 }
