@@ -6,6 +6,14 @@ using namespace std;
 
 vector<int>arr;
 
+struct Args
+{
+    int begin;
+    int end;
+};
+
+pthread_mutex_t mtx1 = PTHREAD_MUTEX_INITIALIZER;
+
 void DataGenerate()
 {
     srand((size_t)time(NULL));
@@ -22,12 +30,31 @@ void Merge(vector<int>&arr,int begin,int mid,int end) {
         arr[i] = (left[Lindex]>right[Rindex]?left[Lindex++]:right[Rindex++]);
 }
 
-void MergeSort(int begin,int end) {
+void MergeSort(Args* args) {
+    int begin = args->begin,end = args->end;
     if(begin==end)
         return;
     int mid = (begin + end)/2;
-    MergeSort(begin,mid);
-    MergeSort(mid+1,end);
+    
+    if (end - begin <= 10240) {
+        Args Larg = Args{begin, mid};
+        Args Rarg = Args{mid + 1, end};
+
+        MergeSort(&Larg);
+        MergeSort(&Rarg);
+        Merge(arr, begin, mid, end);
+
+        return;
+    }
+
+    pthread_t ptd1,ptd2;
+
+    Args Largs = {begin,mid},Rargs = {mid+1,end};
+    pthread_create(&ptd1,NULL,(void*(*)(void*))MergeSort,&Largs);
+    pthread_create(&ptd2,NULL,(void*(*)(void*))MergeSort,&Rargs);
+
+    pthread_join(ptd1,NULL);
+    pthread_join(ptd2,NULL);
     Merge(arr,begin,mid,end);
 }
 
@@ -36,7 +63,7 @@ void ArrPrint(vector<int>&arr)
     int count = 0;
     for(int i = 0;i<arr.size();i++)
         cout<<arr[i]<<endl,count++;
-    cout<<count<<endl;
+    cout<<endl<<"Count::"<<count<<endl;
 }
 
 int main()
@@ -44,13 +71,15 @@ int main()
     DataGenerate();
     auto start = std::chrono::system_clock::now();
 
-    MergeSort(0,arr.size());
+    Args args = {0,(int)arr.size()-1};
+    MergeSort(&args);
+
 
     auto end = chrono::system_clock::now();
     auto duration = chrono::duration_cast<chrono::microseconds>(end - start);
 
     ArrPrint(arr);
-    cout <<"单"<< (double)(duration.count()) * chrono::microseconds::period::num / chrono::microseconds::period::den  << "s" << endl;
+    cout <<"多"<< (double)(duration.count()) * chrono::microseconds::period::num / chrono::microseconds::period::den  << "s" << endl;
 
     return 0;
 }
