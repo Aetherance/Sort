@@ -4,12 +4,14 @@
 #include<chrono>
 using namespace std;
 
+#define DataSize 10000000
+
 vector<int>arr;
 
 void DataGenerate()
 {
     srand((size_t)time(NULL));
-    for(int i = 0;i<100000000;i++)
+    for(int i = 0;i<DataSize;i++)
         arr.push_back(rand());
 }
 

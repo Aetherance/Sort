@@ -4,7 +4,7 @@
 #include<chrono>
 using namespace std;
 
-#define DataSize 100000000
+#define DataSize 10000000
 
 vector<int>arr;
 
@@ -19,7 +19,7 @@ pthread_mutex_t mtx1 = PTHREAD_MUTEX_INITIALIZER;
 void DataGenerate()
 {
     srand((size_t)time(NULL));
-    for(int i = 0;i<100000000;i++)
+    for(int i = 0;i<DataSize;i++)
         arr.push_back(rand());
 }
 
