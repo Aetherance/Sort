@@ -4,6 +4,8 @@
 #include<chrono>
 using namespace std;
 
+#define DataSize 100000000
+
 vector<int>arr;
 
 struct Args
@@ -17,7 +19,7 @@ pthread_mutex_t mtx1 = PTHREAD_MUTEX_INITIALIZER;
 void DataGenerate()
 {
     srand((size_t)time(NULL));
-    for(int i = 0;i<10000000;i++)
+    for(int i = 0;i<100000000;i++)
         arr.push_back(rand());
 }
 
@@ -36,7 +38,7 @@ void MergeSort(Args* args) {
         return;
     int mid = (begin + end)/2;
     
-    if (end - begin <= 10240) {
+    if (end - begin <= DataSize/1000) {
         Args Larg = Args{begin, mid};
         Args Rarg = Args{mid + 1, end};
 
@@ -74,11 +76,10 @@ int main()
     Args args = {0,(int)arr.size()-1};
     MergeSort(&args);
 
-
     auto end = chrono::system_clock::now();
     auto duration = chrono::duration_cast<chrono::microseconds>(end - start);
 
-    ArrPrint(arr);
+    // ArrPrint(arr);
     cout <<"多"<< (double)(duration.count()) * chrono::microseconds::period::num / chrono::microseconds::period::den  << "s" << endl;
 
     return 0;

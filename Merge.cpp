@@ -9,7 +9,7 @@ vector<int>arr;
 void DataGenerate()
 {
     srand((size_t)time(NULL));
-    for(int i = 0;i<10000000;i++)
+    for(int i = 0;i<100000000;i++)
         arr.push_back(rand());
 }
 
@@ -49,7 +49,7 @@ int main()
     auto end = chrono::system_clock::now();
     auto duration = chrono::duration_cast<chrono::microseconds>(end - start);
 
-    ArrPrint(arr);
+    // ArrPrint(arr);
     cout <<"单"<< (double)(duration.count()) * chrono::microseconds::period::num / chrono::microseconds::period::den  << "s" << endl;
 
     return 0;
