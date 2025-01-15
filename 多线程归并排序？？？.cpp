@@ -1,5 +1,3 @@
-// later
-
 #include<iostream>
 #include<vector>
 #include<limits.h>
@@ -98,3 +96,5 @@ int main()
     cout<<"多线程 done! 共用"<<t2-t1<<"秒"<<endl;
     return 0;
 }
+
+// 错误案例如上
